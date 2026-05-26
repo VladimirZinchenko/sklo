@@ -1,0 +1,20 @@
+uuid: 97833075-9476-435b-8693-0f18f4c099c1
+langcode: en
+status: true
+dependencies:
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: oHj7RYmA39Uvt2NQdb_iYesvjoQ-KA1da18aMDG39Fg
+id: b5sklo_page_title
+theme: b5sklo
+region: content
+weight: -6
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

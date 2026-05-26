@@ -1,0 +1,11 @@
+uuid: dee7145c-33fa-4f9e-b6e1-640ed7d2f10b
+langcode: uk
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: puBstSLDz8mbaWU357zaqQDBGMGsJzG0j-TQNQkjg20
+id: '404'
+label: '404 сторінку не знайдено'
+tags:
+  canonical_url: '[site:url]'
+  shortlink: '[site:url]'

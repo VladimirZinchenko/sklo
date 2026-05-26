@@ -1,0 +1,16 @@
+uuid: cfd66712-fc30-4bee-afec-b90b2ea2a6f5
+langcode: uk
+status: true
+dependencies:
+  module:
+    - pathauto
+  enforced:
+    module:
+      - node
+_core:
+  default_config_hash: Cr0CsPUSuio4ClP7bOTqHBefJOLtN5KPyKyYj9E4qvQ
+id: pathauto_update_alias_node
+label: 'Оновити синонім URL'
+type: node
+plugin: pathauto_update_alias
+configuration: {  }

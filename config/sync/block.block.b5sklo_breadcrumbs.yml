@@ -1,0 +1,22 @@
+uuid: 110b2146-d80c-411c-9454-52ee365601d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: UEdKgUaVw_4GzcHPE2Sv6IKWBz_g9ied1lzk9Au8De0
+id: b5sklo_breadcrumbs
+theme: b5sklo
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

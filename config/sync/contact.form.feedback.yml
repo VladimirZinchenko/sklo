@@ -1,4 +1,4 @@
-uuid: 231c6493-346f-4f4f-859d-c8f932f47551
+uuid: f5cc8be5-b4a6-458a-8d3e-8576d0c8ac55
 langcode: uk
 status: true
 dependencies: {  }
@@ -7,7 +7,7 @@ _core:
 id: feedback
 label: "Зворотний зв'язок вебсайту"
 recipients:
-  - admin@example.com
+  - info@sklo.trade
 reply: ''
 weight: 0
 message: 'Ваше повідомлення було відправлене.'

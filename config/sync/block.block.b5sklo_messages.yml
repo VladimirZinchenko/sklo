@@ -1,0 +1,22 @@
+uuid: 5bfec838-ee8d-40ac-840d-e178bdcd36a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: awl0Fw5YvlGAOMHoNstj9RwkwcfQgoU-FytiHFt5kag
+id: b5sklo_messages
+theme: b5sklo
+region: content
+weight: -7
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

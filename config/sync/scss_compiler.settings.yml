@@ -1,0 +1,11 @@
+_core:
+  default_config_hash: j3Mi3VXdeeb2e0_Fq9Jt9gUrxWkDpjU2BI4xt2zIZUI
+cache: false
+sourcemaps: true
+output_format: compressed
+flush_cache_type: default
+check_modify_time: true
+precompile: false
+node_modules_path: ''
+plugins:
+  scss: scss_compiler_scssphp2

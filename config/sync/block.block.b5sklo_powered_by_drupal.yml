@@ -1,0 +1,22 @@
+uuid: 4e1d98e9-1d38-442f-b7c2-ccbc28d9634a
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: Gauz3uofD405AxvI4LKUr5ofGlZniBJJtoNdG-lXb5g
+id: b5sklo_powered_by_drupal
+theme: b5sklo
+region: footer
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Powered by Drupal'
+  label_display: '0'
+  provider: system
+visibility: {  }

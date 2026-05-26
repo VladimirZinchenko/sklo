@@ -1,0 +1,22 @@
+uuid: 2f09be42-38aa-491c-8484-808c61f16339
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: XCyvrKppi43EIRKEmG9WUmqdLU5tXeP_vS2ImDQByJI
+id: b5sklo_help
+theme: b5sklo
+region: content
+weight: -3
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

@@ -1,0 +1,27 @@
+uuid: 983315bf-8625-4127-b4b8-aef58c4cab11
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: jZ6H1KIjfxxvN9yR9nYBsGsvB5DcN1u11H7hXhY0PYQ
+id: b5sklo_main_navigation
+theme: b5sklo
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: true
+visibility: {  }

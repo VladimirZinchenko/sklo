@@ -1,0 +1,25 @@
+uuid: 913d03d4-ca65-4eea-aa9c-b203e4013f45
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: BoP6TtY7qIxFO9PMG3Y6XoQj0BS3HICm03jswd13aT8
+id: b5sklo_branding
+theme: b5sklo
+region: nav_branding
+weight: -6
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

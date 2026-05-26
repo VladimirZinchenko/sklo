@@ -1,0 +1,22 @@
+uuid: 845f557e-8105-44fd-8a33-76438a686cb3
+langcode: en
+status: true
+dependencies:
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: nZNZtRSmENi96Os_EqZCGY6r0s_ycy02Wpqt-oKPKZ4
+id: b5sklo_local_tasks
+theme: b5sklo
+region: content
+weight: -4
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

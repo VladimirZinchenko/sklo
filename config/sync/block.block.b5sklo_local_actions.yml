@@ -1,0 +1,20 @@
+uuid: 1d29fdde-fb56-46e9-b004-fe244500a917
+langcode: en
+status: true
+dependencies:
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: ePZVVdfqq-vCfzKTCL1DCUjEtwYLiWMwC2lBPBJoC3E
+id: b5sklo_local_actions
+theme: b5sklo
+region: content
+weight: -2
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

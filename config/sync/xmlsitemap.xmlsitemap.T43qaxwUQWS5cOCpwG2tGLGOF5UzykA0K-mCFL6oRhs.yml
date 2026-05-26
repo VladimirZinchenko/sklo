@@ -1,0 +1,8 @@
+uuid: db6f82af-8df9-4561-89af-484e79dad0bd
+langcode: uk
+status: true
+dependencies: {  }
+id: T43qaxwUQWS5cOCpwG2tGLGOF5UzykA0K-mCFL6oRhs
+label: 'https://sklo.ddev.site'
+context:
+  language: uk

@@ -1,0 +1,22 @@
+uuid: c8fcb825-5aee-433b-b943-0fdd1d15b1de
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - b5sklo
+_core:
+  default_config_hash: ifOs284YCA2TPdRxs9-aI3EuqvTM2ehjTUs9vqKfccA
+id: b5sklo_content
+theme: b5sklo
+region: content
+weight: -1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }
