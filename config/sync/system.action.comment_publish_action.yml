@@ -1,0 +1,13 @@
+uuid: e9f2003e-c63d-4b8e-8ad3-57c0907b50f2
+langcode: uk
+status: true
+dependencies:
+  module:
+    - comment
+_core:
+  default_config_hash: C00dyL_W_5M0nFlgUB3lWUTUs96jn51Jw1MLHVEHZD0
+id: comment_publish_action
+label: 'Опублікувати коментар'
+type: comment
+plugin: 'entity:publish_action:comment'
+configuration: {  }

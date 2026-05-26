@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: ijfbzDTN4CbE7Sr-6ubWzy_t1vH4OtU1doNCLssVz-4
+langcode: uk
+uuid: 5f3be92b-e8fb-4a69-bee3-c53f33c11c31
+name: Sklo
+mail: info@sklo.trade
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: uk
+mail_notification: null

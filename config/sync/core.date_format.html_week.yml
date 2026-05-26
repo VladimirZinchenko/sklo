@@ -1,0 +1,10 @@
+uuid: 8812a0ef-3c2f-4be5-8fff-14ebef9505a0
+langcode: uk
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: wKD4WsoV_wFgv2vgI4mcAAFSIzrye17ykzdwrnApkfY
+id: html_week
+label: 'Тиждень HTML'
+locked: true
+pattern: Y-\WW
