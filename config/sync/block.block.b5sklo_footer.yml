@@ -1,5 +1,5 @@
 uuid: 2ebeeb6d-1c56-4f2b-8a83-e418005b32a5
-langcode: en
+langcode: uk
 status: true
 dependencies:
   config:
@@ -18,7 +18,7 @@ provider: null
 plugin: 'system_menu_block:footer'
 settings:
   id: 'system_menu_block:footer'
-  label: Footer
+  label: 'Нижній колонтитул'
   label_display: '0'
   provider: system
   level: 1

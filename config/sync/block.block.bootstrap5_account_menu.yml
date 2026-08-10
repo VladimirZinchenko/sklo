@@ -1,5 +1,5 @@
 uuid: bab3d5aa-561c-44d7-9b56-71a79182b157
-langcode: en
+langcode: uk
 status: true
 dependencies:
   config:
@@ -18,7 +18,7 @@ provider: null
 plugin: 'system_menu_block:account'
 settings:
   id: 'system_menu_block:account'
-  label: 'User account menu'
+  label: 'Меню облікового запису користувача'
   label_display: '0'
   provider: system
   level: 1
