@@ -10,15 +10,39 @@
     },
     "repositories": [
         {
+            "name": "commerce_novaposhta",
+            "type": "package",
+            "package": {
+                "name": "drupal/commerce_novaposhta",
+                "version": "2.1.0",
+                "type": "drupal-module",
+                "dist": {
+                    "url": "https://ftp.drupal.org/files/projects/commerce_novaposhta-2.1.0.tar.gz",
+                    "type": "tar"
+                },
+                "require": {
+                    "php": ">=7.1",
+                    "drupal/core": "^10",
+                    "drupal/commerce": "^3",
+                    "drupal/commerce_shipping": "^3.0"
+                }
+            }
+        },
+        {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
     ],
     "require": {
         "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^2.0",
         "drupal/admin_toolbar": "^3.6",
         "drupal/back_to_top": "^3.0",
         "drupal/bootstrap5": "^4.0",
+        "drupal/commerce": "^3.3",
+        "drupal/commerce_feeds": "^1.0@alpha",
+        "drupal/commerce_novaposhta": "2.1.0",
+        "drupal/commerce_shipping": "^3.0",
         "drupal/core-composer-scaffold": "^10.6",
         "drupal/core-project-message": "^10.6",
         "drupal/core-recommended": "^10.6",
@@ -53,7 +77,8 @@
             "drupal/core-project-message": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
-            "tbachert/spi": true
+            "tbachert/spi": true,
+            "cweagans/composer-patches": true
         },
         "sort-packages": true
     },
@@ -112,6 +137,9 @@
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
             ]
+        },
+        "composer-patches": {
+            "patches-file": "patches.json"
         }
     },
     "require-dev": {

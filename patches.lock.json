@@ -1,0 +1,17 @@
+{
+    "_hash": "b8f88a20c71e97f97db92fbe0bf880a7c73eebfc518239794a6af14fdea0a6ed",
+    "patches": {
+        "drupal/commerce_novaposhta": [
+            {
+                "package": "drupal/commerce_novaposhta",
+                "description": "Commerce 3, Nova Poshta API, caching, and PHP 8.4 compatibility",
+                "url": "patches/commerce_novaposhta-2.1.0-commerce3-np-api-php84.patch",
+                "sha256": "c6bd694882abd41d62d0635722e221c2274bc1f36f8489b0eec13ad62c517000",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:patches.json"
+                }
+            }
+        ]
+    }
+}

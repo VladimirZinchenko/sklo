@@ -1,0 +1,616 @@
+--- a/src/Element/Novaposhta.php
++++ b/src/Element/Novaposhta.php
+@@ -66,15 +66,20 @@
+    *   The modified value.
+    */
+   public static function applyDefaults(array $value) {
+-    $properties = [
++    $select_properties = [
+       'region',
+-      'region_data',
+       'city',
+-      'city_data',
+       'warehouse',
++    ];
++    $data_properties = [
++      'region_data',
++      'city_data',
+       'warehouse_data',
+     ];
+-    foreach ($properties as $property) {
++    foreach ($select_properties as $property) {
++      $value[$property] = $value[$property] ?? '';
++    }
++    foreach ($data_properties as $property) {
+       if (!isset($value[$property])) {
+         $value[$property] = NULL;
+       }
+@@ -143,7 +148,7 @@
+       // Reset City and City data when the region changes.
+       if ($values['city'] && !array_key_exists($values['city'], $city_options)) {
+         $values['city_data'] = NULL;
+-        $values['city'] = NULL;
++        $values['city'] = '';
+       }
+ 
+       if ($values['city']) {
+@@ -170,7 +175,7 @@
+     // Reset Warehouse and Warehouse data when the city changes.
+     if ($values['warehouse'] && !array_key_exists($values['warehouse'], $warehouse_options)) {
+       $values['warehouse_data'] = !empty($warehouses) ? reset($warehouses) : NULL;
+-      $values['warehouse'] = $values['warehouse_data']['Ref'] ?? NULL;
++      $values['warehouse'] = $values['warehouse_data']['Ref'] ?? '';
+     }
+ 
+     $id_prefix = implode('-', $element['#parents']);
+@@ -185,7 +190,8 @@
+       '#title' => t('Region'),
+       '#options' => $region_options,
+       '#empty_option' => t('- None -'),
+-      '#default_value' => $values['region'] ?? NULL,
++      '#empty_value' => '',
++      '#default_value' => $values['region'],
+       '#required' => $element['#required'],
+       '#maxlength' => 36,
+       '#parents' => array_merge($element['#parents'], ['region']),
+@@ -196,9 +202,6 @@
+         'wrapper' => $wrapper_id,
+       ],
+     ];
+-    if (!$element['#required']) {
+-      $element['region']['#empty_value'] = '';
+-    }
+ 
+     if (!empty($values['region'])) {
+       $element['city'] = [
+@@ -206,7 +209,8 @@
+         '#title' => t('City'),
+         '#options' => $city_options,
+         '#empty_option' => t('- None -'),
+-        '#default_value' => $values['city'] ?? NULL,
++        '#empty_value' => '',
++        '#default_value' => $values['city'],
+         '#required' => $element['#required'],
+         '#maxlength' => 36,
+         '#parents' => array_merge($element['#parents'], ['city']),
+@@ -218,9 +222,6 @@
+         ],
+         '#access' => !empty($values['region']),
+       ];
+-      if (!$element['#required']) {
+-        $element['city']['#empty_value'] = '';
+-      }
+     }
+ 
+     if (!empty($values['city'])) {
+@@ -228,21 +229,20 @@
+         '#type' => 'select',
+         '#title' => t('Warehouse'),
+         '#options' => $warehouse_options,
+-        '#default_value' => $values['warehouse'] ?? NULL,
++        '#empty_option' => t('- None -'),
++        '#empty_value' => '',
++        '#default_value' => $values['warehouse'],
+         '#required' => $element['#required'],
+         '#maxlength' => 36,
+         '#parents' => array_merge($element['#parents'], ['warehouse']),
+         '#access' => !empty($values['city']),
+         '#needs_validation' => FALSE,
+       ];
+-      if (!$element['#required']) {
+-        $element['warehouse']['#empty_value'] = '';
+-      }
+     }
+ 
+     // Save city and warehouse data to element state.
+     $element_state = [
+-      'region_data' => $values['city_data'],
++      'region_data' => $values['region_data'],
+       'city_data' => $values['city_data'],
+       'warehouse_data' => $values['warehouse_data'],
+     ];
+@@ -298,7 +298,7 @@
+         if (isset($element[$key])) {
+           $parents = array_merge($element['#parents'], [$key]);
+           NestedArray::setValue($input, $parents, '');
+-          $element[$key]['#value'] = NULL;
++          $element[$key]['#value'] = '';
+         }
+       }
+     }
+--- a/src/Plugin/Commerce/ShippingMethod/Novaposhta.php
++++ b/src/Plugin/Commerce/ShippingMethod/Novaposhta.php
+@@ -251,7 +251,10 @@
+ 
+     // Calculates rates from Novaposhta API.
+     $availableRates = [];
+-    if ($shipment->getShippingProfile()->get('address_novaposhta')->isEmpty()) {
++    $shipping_profile = $shipment->getShippingProfile();
++    if (!$shipping_profile ||
++      !$shipping_profile->hasField('address_novaposhta') ||
++      $shipping_profile->get('address_novaposhta')->isEmpty()) {
+       return [];
+     }
+ 
+@@ -261,22 +264,22 @@
+ 
+     $rates = $this->novaposhtaManager->getRates($shipment, $this->configuration);
+ 
+-    foreach ($rates as $key => $rate) {
+-      $price = new Price($rate, static::DEFAULT_CURRENCY);
+-      // Replace CostWarehouse so only WarehouseDoors and WarehouseWarehouse
+-      // rates are available.
+-      $key = str_replace('CostWarehouse', '', $key);
+-      if (array_key_exists($key, $this->getServices())) {
+-        $availableRates[$rate] = new ShippingRate([
+-          'shipping_method_id' => $this->parentEntity->id(),
+-          'service' => $this->services[$key],
+-          'amount' => $price,
+-        ]);
++    foreach ($rates as $service => $rate) {
++      if (!isset($this->services[$service])) {
++        continue;
+       }
++      $price = new Price($rate, static::DEFAULT_CURRENCY);
++      $availableRates[] = new ShippingRate([
++        'shipping_method_id' => $this->parentEntity->id(),
++        'service' => $this->services[$service],
++        'amount' => $price,
++      ]);
+     }
+ 
+     // Sort by price ASC.
+-    ksort($availableRates);
++    usort($availableRates, function (ShippingRate $first, ShippingRate $second) {
++      return $first->getAmount()->compareTo($second->getAmount());
++    });
+     return $availableRates;
+   }
+ 
+--- a/src/Service/NovaposhtaManager.php
++++ b/src/Service/NovaposhtaManager.php
+@@ -19,6 +19,35 @@
+ class NovaposhtaManager implements NovaposhtaManagerInterface {
+ 
+   /**
++   * Nova Poshta service types keyed by Commerce service ID.
++   */
++  protected const SERVICE_TYPES = [
++    'Warehouse' => 'WarehouseWarehouse',
++    'Doors' => 'WarehouseDoors',
++    'Postomat' => 'WarehousePostomat',
++  ];
++
++  /**
++   * Cargo type used for rate requests.
++   */
++  protected const RATE_CARGO_TYPE = 'Cargo';
++
++  /**
++   * Seats count used for rate requests.
++   */
++  protected const RATE_SEATS_COUNT = 1;
++
++  /**
++   * Successful rate cache lifetime in seconds.
++   */
++  protected const RATE_CACHE_TTL = 300;
++
++  /**
++   * Failed rate cache lifetime in seconds.
++   */
++  protected const RATE_FAILURE_CACHE_TTL = 60;
++
++  /**
+    * Api key.
+    *
+    * @var string
+@@ -139,7 +168,7 @@
+   /**
+    * {@inheritdoc}
+    */
+-  public function setApiUrl(string $url = NULL): NovaposhtaManagerInterface {
++  public function setApiUrl(?string $url = NULL): NovaposhtaManagerInterface {
+     $this->apiUrl = $url ?: static::API_URL;
+     return $this;
+   }
+@@ -214,35 +243,77 @@
+    * {@inheritdoc}
+    */
+   public function getRates(ShipmentInterface $shipment, array $config): array {
+-    // All rates returned by Novaposhta API ready to return from this call.
+-    $availableRates = [];
+-
+-    if ($shipment->getShippingProfile()->get('address_novaposhta')->isEmpty()) {
++    $shipping_profile = $shipment->getShippingProfile();
++    if (!$shipping_profile ||
++      !$shipping_profile->hasField('address_novaposhta') ||
++      $shipping_profile->get('address_novaposhta')->isEmpty()) {
+       return [];
+     }
+ 
+-    $novaposhta = $shipment->getShippingProfile()
++    $novaposhta = $shipping_profile
+       ->get('address_novaposhta')
+       ->first();
++    $weight = $shipment->getWeight();
++    $declared_value = $shipment->getTotalDeclaredValue();
++    if (!$novaposhta || !$weight || !$declared_value) {
++      return [];
++    }
+ 
+-    $params = [
+-      'CitySender' => $config['options']['novaposhta']['city'],
+-      'CityRecipient' => $novaposhta->get('city')->getValue(),
+-      'Weight' => $shipment->getWeight()->convert('kg')->getNumber(),
+-      // @todo set ServiceType or receive all rate types.
+-      'ServiceType' => '',
+-      'Cost' => $shipment->getTotalDeclaredValue()->getNumber(),
+-      'CargoType' => 'Cargo',
+-      'SeatsAmount' => 1,
+-    ];
++    $sender_city = $config['options']['novaposhta']['city'] ?? '';
++    $recipient_city = $novaposhta->get('city')->getValue();
++    if (!$sender_city || !$recipient_city) {
++      return [];
++    }
++
++    $weight = $weight->convert('kg')->getNumber();
++    $declared_value = $declared_value->getNumber();
++    $services = array_intersect($config['services'] ?? [], array_keys(static::SERVICE_TYPES));
++    $available_rates = [];
++
++    foreach ($services as $service) {
++      $service_type = static::SERVICE_TYPES[$service];
++      $params = [
++        'CitySender' => $sender_city,
++        'CityRecipient' => $recipient_city,
++        'Weight' => $weight,
++        'ServiceType' => $service_type,
++        'Cost' => $declared_value,
++        'CargoType' => static::RATE_CARGO_TYPE,
++        'SeatsAmount' => static::RATE_SEATS_COUNT,
++      ];
++
++      $cache_parameters = [
++        'api_key' => hash('sha256', $this->key),
++        'sender_city' => $sender_city,
++        'recipient_city' => $recipient_city,
++        'service_type' => $service_type,
++        'weight' => $weight,
++        'declared_value' => $declared_value,
++        'cargo_type' => static::RATE_CARGO_TYPE,
++        'seats_count' => static::RATE_SEATS_COUNT,
++      ];
++      $cid = 'commerce_novaposhta:rate:' . hash('sha256', Json::encode($cache_parameters));
++
++      if ($cache = $this->cache->get($cid)) {
++        if (is_numeric($cache->data)) {
++          $available_rates[$service] = (string) $cache->data;
++        }
++        continue;
++      }
+ 
+-    $response = $this->request(static::INTERNET_DOCUMENT_MODEL, static::GET_DOCUMENT_PRICE_METHOD, $params);
++      $response = $this->request(static::INTERNET_DOCUMENT_MODEL, static::GET_DOCUMENT_PRICE_METHOD, $params);
++      $cost = $response['data'][0]['Cost'] ?? NULL;
++      if (!is_numeric($cost)) {
++        $this->cache->set($cid, NULL, time() + static::RATE_FAILURE_CACHE_TTL);
++        continue;
++      }
+ 
+-    if ($response) {
+-      $availableRates = reset($response['data']);
++      $cost = (string) $cost;
++      $available_rates[$service] = $cost;
++      $this->cache->set($cid, $cost, time() + static::RATE_CACHE_TTL);
+     }
+ 
+-    return $availableRates;
++    return $available_rates;
+   }
+ 
+   /**
+--- a/src/Service/NovaposhtaManagerInterface.php
++++ b/src/Service/NovaposhtaManagerInterface.php
+@@ -113,7 +113,7 @@
+    * @return \Drupal\commerce_novaposhta\Service\NovaposhtaManagerInterface
+    *   Self instance.
+    */
+-  public function setApiUrl(string $url): NovaposhtaManagerInterface;
++  public function setApiUrl(?string $url = NULL): NovaposhtaManagerInterface;
+ 
+   /**
+    * Get API URL.
+--- a/tests/src/Unit/NovaposhtaElementTest.php
++++ b/tests/src/Unit/NovaposhtaElementTest.php
+@@ -0,0 +1,58 @@
++<?php
++
++namespace Drupal\Tests\commerce_novaposhta\Unit;
++
++use Drupal\commerce_novaposhta\Element\Novaposhta;
++use Drupal\commerce_novaposhta\Service\NovaposhtaManagerInterface;
++use Drupal\Core\DependencyInjection\ContainerBuilder;
++use Drupal\Core\Form\FormState;
++use Drupal\Core\StringTranslation\TranslationInterface;
++use Drupal\Tests\UnitTestCase;
++
++/**
++ * Tests the Nova Poshta address element compatibility fixes.
++ *
++ * @group commerce_novaposhta
++ */
++class NovaposhtaElementTest extends UnitTestCase {
++
++  /**
++   * Tests scalar defaults and preservation of region metadata.
++   */
++  public function testScalarDefaultsAndRegionData(): void {
++    $manager = $this->createMock(NovaposhtaManagerInterface::class);
++    $manager->method('getRegions')->willReturn([]);
++    $manager->method('extractRegionOptions')->willReturn([]);
++    $translation = $this->createMock(TranslationInterface::class);
++    $translation->method('translate')->willReturnCallback(fn($string) => $string);
++    $container = new ContainerBuilder();
++    $container->set('commerce.novaposhta.manager', $manager);
++    $container->set('string_translation', $translation);
++    \Drupal::setContainer($container);
++
++    $region_data = ['Ref' => 'region-ref'];
++    $city_data = ['Ref' => 'city-ref'];
++    $values = Novaposhta::applyDefaults([
++      'region_data' => $region_data,
++      'city_data' => $city_data,
++    ]);
++    $this->assertSame('', $values['region']);
++    $this->assertSame('', $values['city']);
++    $this->assertSame('', $values['warehouse']);
++
++    $element = [
++      '#value' => $values,
++      '#parents' => ['address_novaposhta'],
++      '#required' => TRUE,
++    ];
++    $form_state = new FormState();
++    $complete_form = [];
++    Novaposhta::processElement($element, $form_state, $complete_form);
++    $state = Novaposhta::getElementState($element['#parents'], $form_state);
++
++    $this->assertSame('', $element['region']['#default_value']);
++    $this->assertSame($region_data, $state['region_data']);
++    $this->assertNotSame($city_data, $state['region_data']);
++  }
++
++}
+--- a/tests/src/Unit/NovaposhtaRatesTest.php
++++ b/tests/src/Unit/NovaposhtaRatesTest.php
+@@ -0,0 +1,228 @@
++<?php
++
++namespace Drupal\Tests\commerce_novaposhta\Unit;
++
++use Drupal\commerce_novaposhta\Service\NovaposhtaManager;
++use Drupal\commerce_price\Price;
++use Drupal\commerce_shipping\Entity\ShipmentInterface;
++use Drupal\Core\Cache\CacheBackendInterface;
++use Drupal\Core\Config\ConfigFactoryInterface;
++use Drupal\Core\Config\ImmutableConfig;
++use Drupal\Core\Extension\ModuleHandlerInterface;
++use Drupal\Core\Field\FieldItemInterface;
++use Drupal\Core\Field\FieldItemListInterface;
++use Drupal\Core\TypedData\TypedDataInterface;
++use Drupal\physical\Weight;
++use Drupal\profile\Entity\ProfileInterface;
++use Drupal\Tests\UnitTestCase;
++use GuzzleHttp\ClientInterface;
++use PHPUnit\Framework\MockObject\MockObject;
++use Psr\Log\LoggerInterface;
++
++/**
++ * Tests Nova Poshta rate calculation compatibility.
++ *
++ * @group commerce_novaposhta
++ */
++class NovaposhtaRatesTest extends UnitTestCase {
++
++  /**
++   * Tests service mapping and normalized rates.
++   */
++  public function testServiceTypeMapping(): void {
++    $cache = $this->createMock(CacheBackendInterface::class);
++    $cache->method('get')->willReturn(FALSE);
++    $manager = $this->createManager($cache);
++    $service_types = [];
++    $manager->expects($this->exactly(3))
++      ->method('request')
++      ->willReturnCallback(function ($model, $method, array $parameters) use (&$service_types) {
++        $service_types[] = $parameters['ServiceType'];
++        return ['data' => [['Cost' => count($service_types) * 100]]];
++      });
++
++    $rates = $manager->getRates($this->createShipment(), $this->createConfiguration([
++      'Warehouse',
++      'Doors',
++      'Postomat',
++    ]));
++
++    $this->assertSame([
++      'WarehouseWarehouse',
++      'WarehouseDoors',
++      'WarehousePostomat',
++    ], $service_types);
++    $this->assertSame([
++      'Warehouse' => '100',
++      'Doors' => '200',
++      'Postomat' => '300',
++    ], $rates);
++  }
++
++  /**
++   * Tests that disabled services do not cause API requests.
++   */
++  public function testDisabledServiceDoesNotRequestRate(): void {
++    $cache = $this->createMock(CacheBackendInterface::class);
++    $cache->method('get')->willReturn(FALSE);
++    $manager = $this->createManager($cache);
++    $manager->expects($this->once())
++      ->method('request')
++      ->with(
++        $this->anything(),
++        $this->anything(),
++        $this->callback(fn(array $parameters) => $parameters['ServiceType'] === 'WarehouseWarehouse')
++      )
++      ->willReturn(['data' => [['Cost' => 100]]]);
++
++    $rates = $manager->getRates($this->createShipment(), $this->createConfiguration(['Warehouse']));
++    $this->assertSame(['Warehouse' => '100'], $rates);
++  }
++
++  /**
++   * Tests a cache miss followed by a cache hit.
++   */
++  public function testRateCache(): void {
++    $items = [];
++    $cache = $this->createMock(CacheBackendInterface::class);
++    $cache->method('get')->willReturnCallback(function ($cid) use (&$items) {
++      return array_key_exists($cid, $items) ? (object) ['data' => $items[$cid]] : FALSE;
++    });
++    $cache->method('set')->willReturnCallback(function ($cid, $data) use (&$items) {
++      $items[$cid] = $data;
++    });
++    $manager = $this->createManager($cache);
++    $manager->expects($this->once())
++      ->method('request')
++      ->willReturn(['data' => [['Cost' => 125]]]);
++    $configuration = $this->createConfiguration(['Warehouse']);
++    $shipment = $this->createShipment();
++
++    $this->assertSame(['Warehouse' => '125'], $manager->getRates($shipment, $configuration));
++    $this->assertSame(['Warehouse' => '125'], $manager->getRates($shipment, $configuration));
++  }
++
++  /**
++   * Tests that one failed service does not remove other rates.
++   */
++  public function testOneFailedServiceDoesNotRemoveOtherRates(): void {
++    $cache = $this->createMock(CacheBackendInterface::class);
++    $cache->method('get')->willReturn(FALSE);
++    $manager = $this->createManager($cache);
++    $manager->method('request')->willReturnCallback(function ($model, $method, array $parameters) {
++      return $parameters['ServiceType'] === 'WarehouseWarehouse' ? [] : ['data' => [['Cost' => 150]]];
++    });
++
++    $rates = $manager->getRates($this->createShipment(), $this->createConfiguration([
++      'Warehouse',
++      'Doors',
++    ]));
++    $this->assertSame(['Doors' => '150'], $rates);
++  }
++
++  /**
++   * Tests nullable shipment inputs.
++   *
++   * @dataProvider nullableShipmentProvider
++   */
++  public function testNullableShipmentData(bool $profile, bool $weight, bool $declared_value): void {
++    $cache = $this->createMock(CacheBackendInterface::class);
++    $manager = $this->createManager($cache);
++    $manager->expects($this->never())->method('request');
++
++    $this->assertSame([], $manager->getRates(
++      $this->createShipment($profile, $weight, $declared_value),
++      $this->createConfiguration(['Warehouse'])
++    ));
++  }
++
++  /**
++   * Provides nullable shipment combinations.
++   */
++  public static function nullableShipmentProvider(): array {
++    return [
++      'profile' => [FALSE, TRUE, TRUE],
++      'weight' => [TRUE, FALSE, TRUE],
++      'declared value' => [TRUE, TRUE, FALSE],
++    ];
++  }
++
++  /**
++   * Tests that a response without Cost is skipped.
++   */
++  public function testResponseWithoutCostIsSkipped(): void {
++    $cache = $this->createMock(CacheBackendInterface::class);
++    $cache->method('get')->willReturn(FALSE);
++    $manager = $this->createManager($cache);
++    $manager->expects($this->once())
++      ->method('request')
++      ->willReturn(['data' => [['AssessedCost' => 100]]]);
++
++    $this->assertSame([], $manager->getRates(
++      $this->createShipment(),
++      $this->createConfiguration(['Warehouse'])
++    ));
++  }
++
++  /**
++   * Creates a manager with a mocked API request method.
++   */
++  private function createManager(CacheBackendInterface $cache): NovaposhtaManager&MockObject {
++    $config = $this->createMock(ImmutableConfig::class);
++    $config->method('get')->willReturn('');
++    $config_factory = $this->createMock(ConfigFactoryInterface::class);
++    $config_factory->method('get')->willReturn($config);
++
++    return $this->getMockBuilder(NovaposhtaManager::class)
++      ->setConstructorArgs([
++        $config_factory,
++        $this->createMock(ClientInterface::class),
++        $this->createMock(ModuleHandlerInterface::class),
++        $cache,
++        $this->createMock(LoggerInterface::class),
++      ])
++      ->onlyMethods(['request'])
++      ->getMock();
++  }
++
++  /**
++   * Creates a shipment mock with Nova Poshta address data.
++   */
++  private function createShipment(bool $with_profile = TRUE, bool $with_weight = TRUE, bool $with_declared_value = TRUE): ShipmentInterface {
++    $shipment = $this->createMock(ShipmentInterface::class);
++    if ($with_profile) {
++      $city = $this->createMock(TypedDataInterface::class);
++      $city->method('getValue')->willReturn('recipient-city');
++      $address = $this->createMock(FieldItemInterface::class);
++      $address->method('get')->with('city')->willReturn($city);
++      $address_field = $this->createMock(FieldItemListInterface::class);
++      $address_field->method('isEmpty')->willReturn(FALSE);
++      $address_field->method('first')->willReturn($address);
++      $profile = $this->createMock(ProfileInterface::class);
++      $profile->method('hasField')->with('address_novaposhta')->willReturn(TRUE);
++      $profile->method('get')->with('address_novaposhta')->willReturn($address_field);
++      $shipment->method('getShippingProfile')->willReturn($profile);
++    }
++    else {
++      $shipment->method('getShippingProfile')->willReturn(NULL);
++    }
++    $shipment->method('getWeight')->willReturn($with_weight ? new Weight('1', 'kg') : NULL);
++    $shipment->method('getTotalDeclaredValue')->willReturn($with_declared_value ? new Price('100', 'UAH') : NULL);
++    return $shipment;
++  }
++
++  /**
++   * Creates shipping method configuration.
++   */
++  private function createConfiguration(array $services): array {
++    return [
++      'services' => $services,
++      'options' => [
++        'novaposhta' => [
++          'city' => 'sender-city',
++        ],
++      ],
++    ];
++  }
++
++}

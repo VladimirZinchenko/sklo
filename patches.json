@@ -1,0 +1,7 @@
+{
+    "patches": {
+        "drupal/commerce_novaposhta": {
+            "Commerce 3, Nova Poshta API, caching, and PHP 8.4 compatibility": "patches/commerce_novaposhta-2.1.0-commerce3-np-api-php84.patch"
+        }
+    }
+}
