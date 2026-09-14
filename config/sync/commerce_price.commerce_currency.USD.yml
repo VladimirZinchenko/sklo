@@ -1,0 +1,9 @@
+uuid: 80546418-fd45-449d-b18f-a0ebd1839b02
+langcode: uk
+status: true
+dependencies: {  }
+currencyCode: USD
+name: 'долар США'
+numericCode: '840'
+symbol: USD
+fractionDigits: 2

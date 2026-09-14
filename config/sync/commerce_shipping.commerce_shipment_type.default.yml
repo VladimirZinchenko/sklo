@@ -1,0 +1,12 @@
+uuid: 28c919aa-575d-4052-b453-2b22ddf6f13c
+langcode: uk
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: hqMH9C7kamyh9ei_oI1WgbF9blY8Fy9J9zXuu0XHFpU
+id: default
+label: Базово
+traits: {  }
+profileType: customer
+sendConfirmation: false
+confirmationBcc: ''

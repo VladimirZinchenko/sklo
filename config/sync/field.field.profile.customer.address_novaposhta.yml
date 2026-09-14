@@ -1,0 +1,21 @@
+uuid: 5122e1e1-451a-4c88-baf3-3197d2d7ed28
+langcode: uk
+status: true
+dependencies:
+  config:
+    - field.storage.profile.address_novaposhta
+    - profile.type.customer
+  module:
+    - commerce_novaposhta
+id: profile.customer.address_novaposhta
+field_name: address_novaposhta
+entity_type: profile
+bundle: customer
+label: Novaposhta
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: null
+settings: {  }
+field_type: novaposhta

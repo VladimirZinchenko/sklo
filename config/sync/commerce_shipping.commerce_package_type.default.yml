@@ -1,0 +1,14 @@
+uuid: d6fee656-e147-4050-b855-21a7f196c7d1
+langcode: uk
+status: true
+dependencies: {  }
+id: default
+label: 'Default (30x20x10cm)'
+dimensions:
+  length: '30'
+  width: '20'
+  height: '10'
+  unit: cm
+weight:
+  number: '2'
+  unit: kg

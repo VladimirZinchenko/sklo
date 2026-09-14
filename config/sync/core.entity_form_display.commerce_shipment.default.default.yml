@@ -1,0 +1,78 @@
+uuid: 3335d0c9-d03b-48d6-8818-7daf87d39cfe
+langcode: uk
+status: true
+dependencies:
+  config:
+    - commerce_shipping.commerce_shipment_type.default
+    - field.field.commerce_shipment.default.dimensions
+  module:
+    - commerce_shipping
+    - physical
+id: commerce_shipment.default.default
+targetEntityType: commerce_shipment
+bundle: default
+mode: default
+content:
+  dimensions:
+    type: physical_dimensions_default
+    weight: 4
+    region: content
+    settings:
+      default_unit: cm
+      allow_unit_change: false
+      available_units:
+        mm: '0'
+        cm: '0'
+        m: '0'
+        km: '0'
+        in: '0'
+        ft: '0'
+        mg: '0'
+        µg: '0'
+        M: '0'
+    third_party_settings: {  }
+  shipping_method:
+    type: commerce_shipping_rate
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  shipping_profile:
+    type: commerce_shipping_profile
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  tracking_code:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  weight:
+    type: physical_measurement_default
+    weight: 5
+    region: content
+    settings:
+      default_unit: kg
+      allow_unit_change: false
+      available_units:
+        mg: '0'
+        g: '0'
+        kg: '0'
+        oz: '0'
+        lb: '0'
+        ct: '0'
+    third_party_settings: {  }
+hidden:
+  state: true

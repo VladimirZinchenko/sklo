@@ -1,0 +1,11 @@
+uuid: 1149c2ae-6e2e-4b67-88af-553cf3910dfb
+langcode: uk
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.default
+id: commerce_product_variation.default
+target_entity_type_id: commerce_product_variation
+target_bundle: default
+default_langcode: site_default
+language_alterable: false

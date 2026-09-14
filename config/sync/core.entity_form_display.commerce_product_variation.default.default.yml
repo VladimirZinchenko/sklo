@@ -1,0 +1,96 @@
+uuid: 98d71cf9-4866-41e8-8c58-2d3b741d7697
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.default
+    - field.field.commerce_product_variation.default.dimensions
+    - field.field.commerce_product_variation.default.weight
+  module:
+    - commerce_price
+    - physical
+_core:
+  default_config_hash: dDLA40Axom_QFA79EWUpe_bWXWE8I_7MijzPkslbVfA
+id: commerce_product_variation.default.default
+targetEntityType: commerce_product_variation
+bundle: default
+mode: default
+content:
+  dimensions:
+    type: physical_dimensions_default
+    weight: 90
+    region: content
+    settings:
+      default_unit: cm
+      allow_unit_change: false
+      available_units:
+        mm: '0'
+        cm: '0'
+        m: '0'
+        km: '0'
+        in: '0'
+        ft: '0'
+        mg: '0'
+        µg: '0'
+        M: '0'
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  list_price:
+    type: commerce_list_price
+    weight: -1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  price:
+    type: commerce_price_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  sku:
+    type: string_textfield
+    weight: -4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  weight:
+    type: physical_measurement_default
+    weight: 91
+    region: content
+    settings:
+      default_unit: kg
+      allow_unit_change: false
+      available_units:
+        mg: '0'
+        g: '0'
+        kg: '0'
+        oz: '0'
+        lb: '0'
+        ct: '0'
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

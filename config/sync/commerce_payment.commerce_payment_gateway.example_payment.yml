@@ -1,0 +1,19 @@
+uuid: e487c3c0-0b53-4ef0-9f6e-51a3d652a9cd
+langcode: uk
+status: true
+dependencies:
+  module:
+    - commerce_payment_example
+id: example_payment
+label: 'Example payment'
+weight: null
+plugin: example_stored_offsite_redirect
+configuration:
+  display_label: 'Example Stored Offsite'
+  mode: test
+  payment_method_types:
+    - credit_card
+  collect_billing_information: true
+  redirect_method: post
+conditions: {  }
+conditionOperator: AND

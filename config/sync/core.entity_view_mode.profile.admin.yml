@@ -1,0 +1,16 @@
+uuid: 0c319c66-8250-4fd3-b6ee-211cc76c2611
+langcode: uk
+status: true
+dependencies:
+  module:
+    - profile
+  enforced:
+    module:
+      - commerce_order
+_core:
+  default_config_hash: rNBHCP7hJFMjP_iDe9-0AsSfkGC98V6Lh_oeOwmLos8
+id: profile.admin
+label: Адмін
+description: ''
+targetEntityType: profile
+cache: true

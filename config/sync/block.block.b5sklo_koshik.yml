@@ -1,0 +1,22 @@
+uuid: e8723d85-613a-4d25-9ce4-58028615c18a
+langcode: uk
+status: true
+dependencies:
+  module:
+    - commerce_cart
+  theme:
+    - b5sklo
+id: b5sklo_koshik
+theme: b5sklo
+region: nav_additional
+weight: 0
+provider: null
+plugin: commerce_cart
+settings:
+  id: commerce_cart
+  label: Кошик
+  label_display: '0'
+  provider: commerce_cart
+  dropdown: true
+  show_if_empty: true
+visibility: {  }

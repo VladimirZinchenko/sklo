@@ -1,0 +1,21 @@
+uuid: 3ca8ca07-85c6-4ed2-a9be-f00583b78285
+langcode: uk
+status: true
+dependencies:
+  enforced:
+    module:
+      - commerce_order
+third_party_settings:
+  commerce_order:
+    customer_profile_type: true
+    novaposhta_profile_type: 1
+_core:
+  default_config_hash: I3_fH4tUQVejPgxvJzH1-mGg9A9OaY4Hm5iN2G2Fz20
+id: customer
+label: Покупець
+display_label: 'Відомості про покупця'
+multiple: true
+registration: false
+roles: {  }
+allow_revisions: false
+new_revision: false

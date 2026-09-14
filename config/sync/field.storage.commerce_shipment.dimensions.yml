@@ -1,0 +1,19 @@
+uuid: 3dc0cab1-f14d-4f1c-ac53-bd85acabc933
+langcode: uk
+status: true
+dependencies:
+  module:
+    - commerce_shipping
+    - physical
+id: commerce_shipment.dimensions
+field_name: dimensions
+entity_type: commerce_shipment
+type: physical_dimensions
+settings: {  }
+module: physical
+locked: true
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

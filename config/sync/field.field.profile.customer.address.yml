@@ -1,0 +1,43 @@
+uuid: 56e418aa-d7ad-4cff-ab43-fef4b39c22b9
+langcode: uk
+status: true
+dependencies:
+  config:
+    - field.storage.profile.address
+    - profile.type.customer
+  module:
+    - address
+_core:
+  default_config_hash: FOL3MwTOMLofnjg4T-VREfe6NAxA7UXcEP-Q-4K9qOI
+id: profile.customer.address
+field_name: address
+entity_type: profile
+bundle: customer
+label: Адреса
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    additionalName:
+      override: hidden
+    organization:
+      override: hidden
+    addressLine1:
+      override: hidden
+    addressLine2:
+      override: hidden
+    addressLine3:
+      override: hidden
+    postalCode:
+      override: hidden
+    locality:
+      override: hidden
+    administrativeArea:
+      override: hidden
+  fields: {  }
+field_type: address

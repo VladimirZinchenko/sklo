@@ -1,0 +1,16 @@
+uuid: 55957479-ecc0-471d-9193-3d5be2982dea
+langcode: uk
+status: true
+dependencies:
+  module:
+    - profile
+  enforced:
+    module:
+      - commerce_shipping
+_core:
+  default_config_hash: JPUL4eD5T2YoK0l8mg_Ey9_HY9vGRwqr4BM_GqaAgmw
+id: profile.shipping
+label: Доставка
+description: ''
+targetEntityType: profile
+cache: true

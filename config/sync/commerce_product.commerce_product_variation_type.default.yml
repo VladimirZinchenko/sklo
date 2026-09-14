@@ -1,0 +1,14 @@
+uuid: 56e1f002-1475-452a-a027-55665ef7c41a
+langcode: uk
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 3vA4FKQ1Qu8B1R8UdGPnmMfJrYO6Y6uMqeNgDgXxods
+id: default
+label: Базово
+traits:
+  - purchasable_entity_dimensions
+  - purchasable_entity_shippable
+locked: false
+orderItemType: default
+generateTitle: false
