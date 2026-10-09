@@ -5,8 +5,14 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.default
     - field.field.commerce_product.default.body
+    - field.field.commerce_product.default.feeds_item
+    - field.field.commerce_product.default.field_category
+    - field.field.commerce_product.default.field_code
+    - field.field.commerce_product.default.field_image
+    - image.style.large
   module:
     - commerce_product
+    - image
     - text
 _core:
   default_config_hash: 10qgl6V_HwkrJufzsNCV75OpqOeMzzKDJb3BhaogmzQ
@@ -17,31 +23,57 @@ mode: default
 content:
   body:
     type: text_default
-    weight: 0
     label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 5
     region: content
-  title:
-    label: hidden
+  field_category:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_code:
     type: string
-    weight: -5
-    region: content
+    label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  variations:
-    type: commerce_add_to_cart
-    weight: 1
+    weight: 3
+    region: content
+  field_image:
+    type: image
     label: hidden
     settings:
-      default_quantity: '1'
-      combine: true
-      show_quantity: false
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: eager
     third_party_settings: {  }
+    weight: 0
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  variations:
+    type: commerce_add_to_cart
+    label: hidden
+    settings:
+      combine: true
+    third_party_settings: {  }
+    weight: 2
     region: content
 hidden:
   created: true
+  feeds_item: true
   langcode: true
   stores: true
   uid: true

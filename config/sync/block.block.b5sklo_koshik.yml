@@ -9,7 +9,7 @@ dependencies:
 id: b5sklo_koshik
 theme: b5sklo
 region: nav_additional
-weight: 0
+weight: -4
 provider: null
 plugin: commerce_cart
 settings:

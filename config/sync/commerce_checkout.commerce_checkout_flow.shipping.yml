@@ -45,41 +45,40 @@ configuration:
       step: review
       weight: 3
       wrapper_element: null
+    payment_information:
+      step: review
+      weight: 4
+      wrapper_element: fieldset
+      always_display: true
+      require_payment_method: false
+    payment_process:
+      display_label: null
+      step: payment
+      weight: 5
+      wrapper_element: container
+      capture: true
     completion_message:
       display_label: null
       step: complete
-      weight: 5
+      weight: 6
       wrapper_element: null
       message:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
         format: plain_text
       display_pane_summaries: true
-    order_summary:
-      display_label: null
-      step: _sidebar
-      weight: 7
-      wrapper_element: container
-      view: commerce_checkout_order_summary
     completion_register:
       display_label: null
       step: complete
-      weight: 6
+      weight: 7
       wrapper_element: null
+    order_summary:
+      display_label: null
+      step: _sidebar
+      weight: 8
+      wrapper_element: container
+      view: commerce_checkout_order_summary
     customer_comments:
       display_label: null
       step: _disabled
       weight: 9
       wrapper_element: fieldset
-    payment_information:
-      display_label: null
-      step: _disabled
-      weight: 8
-      wrapper_element: fieldset
-      always_display: false
-      require_payment_method: false
-    payment_process:
-      display_label: null
-      step: payment
-      weight: 4
-      wrapper_element: container
-      capture: true

@@ -5,7 +5,11 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.default
     - core.entity_view_mode.commerce_product_variation.teaser
+    - field.field.commerce_product_variation.default.attribute_plus
     - field.field.commerce_product_variation.default.dimensions
+    - field.field.commerce_product_variation.default.feeds_item
+    - field.field.commerce_product_variation.default.field_gtin
+    - field.field.commerce_product_variation.default.field_status
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
@@ -16,24 +20,28 @@ mode: teaser
 content:
   list_price:
     type: commerce_price_default
-    label: above
+    label: hidden
     settings:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: -1
+    weight: 2
     region: content
   price:
     type: commerce_price_default
-    label: above
+    label: hidden
     settings:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: 0
+    weight: 2
     region: content
 hidden:
+  attribute_plus: true
   dimensions: true
+  feeds_item: true
+  field_gtin: true
+  field_status: true
   langcode: true
   product_id: true
   sku: true

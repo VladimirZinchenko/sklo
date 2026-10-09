@@ -1,0 +1,7 @@
+uuid: 9cb25211-1df9-4f72-a9fa-177e3130bbb0
+langcode: uk
+status: true
+dependencies: {  }
+id: plus
+label: Plus
+elementType: radios

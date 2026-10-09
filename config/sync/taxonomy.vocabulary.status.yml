@@ -1,0 +1,9 @@
+uuid: fa73a488-78e1-4370-aa62-4a754398451a
+langcode: uk
+status: true
+dependencies: {  }
+name: Статус
+vid: status
+description: null
+weight: 0
+new_revision: false

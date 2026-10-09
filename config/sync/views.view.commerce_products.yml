@@ -218,7 +218,7 @@ display:
           entity_type: commerce_product
           entity_field: status
           plugin_id: field
-          label: Стан
+          label: Статус
           exclude: false
           alter:
             alter_text: false

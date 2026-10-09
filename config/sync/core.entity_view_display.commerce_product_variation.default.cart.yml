@@ -5,7 +5,11 @@ dependencies:
   config:
     - commerce_product.commerce_product_variation_type.default
     - core.entity_view_mode.commerce_product_variation.cart
+    - field.field.commerce_product_variation.default.attribute_plus
     - field.field.commerce_product_variation.default.dimensions
+    - field.field.commerce_product_variation.default.feeds_item
+    - field.field.commerce_product_variation.default.field_gtin
+    - field.field.commerce_product_variation.default.field_status
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
@@ -38,7 +42,11 @@ content:
     weight: 0
     region: content
 hidden:
+  attribute_plus: true
   dimensions: true
+  feeds_item: true
+  field_gtin: true
+  field_status: true
   langcode: true
   price: true
   sku: true

@@ -14,6 +14,6 @@ configuration:
   payment_method_types:
     - credit_card
   collect_billing_information: true
-  redirect_method: post
+  redirect_method: get
 conditions: {  }
 conditionOperator: AND

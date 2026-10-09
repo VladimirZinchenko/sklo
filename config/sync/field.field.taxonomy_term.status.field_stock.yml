@@ -1,0 +1,23 @@
+uuid: bcd553e9-72bc-497f-b9de-0b39ab83a9dd
+langcode: uk
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_stock
+    - taxonomy.vocabulary.status
+  module:
+    - options
+id: taxonomy_term.status.field_stock
+field_name: field_stock
+entity_type: taxonomy_term
+bundle: status
+label: Stock
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: instock
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,39 @@
+uuid: d40505b0-4d1b-4cb3-854c-808624e5668c
+langcode: uk
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.status.field_shipping
+    - field.field.taxonomy_term.status.field_stock
+    - taxonomy.vocabulary.status
+  module:
+    - options
+    - text
+id: taxonomy_term.status.default
+targetEntityType: taxonomy_term
+bundle: status
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_shipping:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_stock:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

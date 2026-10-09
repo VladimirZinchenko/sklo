@@ -1,0 +1,19 @@
+uuid: 8e9869d7-f4aa-4186-9059-3fb724c0a413
+langcode: uk
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.default
+    - field.storage.commerce_product_variation.field_gtin
+id: commerce_product_variation.default.field_gtin
+field_name: field_gtin
+entity_type: commerce_product_variation
+bundle: default
+label: GTIN
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,23 @@
+uuid: 1f724ee7-b582-47e5-9bd0-18ac8b85333b
+langcode: uk
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_shipping
+    - taxonomy.vocabulary.status
+  module:
+    - options
+id: taxonomy_term.status.field_shipping
+field_name: field_shipping
+entity_type: taxonomy_term
+bundle: status
+label: Shipping
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: pickup_now_in_shop
+default_value_callback: ''
+settings: {  }
+field_type: list_string

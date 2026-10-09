@@ -1,0 +1,9 @@
+uuid: be5ddee2-b458-4d90-a923-6d74b3be2192
+langcode: uk
+status: true
+dependencies: {  }
+name: Категорія
+vid: category
+description: null
+weight: 0
+new_revision: false

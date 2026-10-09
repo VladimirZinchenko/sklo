@@ -1,0 +1,29 @@
+uuid: 0fb9357b-d6dc-45b9-bd97-b9795a93dfa7
+langcode: uk
+status: true
+dependencies:
+  config:
+    - views.view.category_slider
+  module:
+    - system
+    - views
+  theme:
+    - b5sklo
+id: b5sklo_views_block__category_slider_block_1
+theme: b5sklo
+region: header
+weight: 0
+provider: null
+plugin: 'views_block:category_slider-block_1'
+settings:
+  id: 'views_block:category_slider-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

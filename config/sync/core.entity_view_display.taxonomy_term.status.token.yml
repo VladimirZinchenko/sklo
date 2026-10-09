@@ -1,0 +1,34 @@
+uuid: 45a899e9-9bd0-49be-b78c-3f3aab15e078
+langcode: uk
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.token
+    - field.field.taxonomy_term.status.field_shipping
+    - field.field.taxonomy_term.status.field_stock
+    - taxonomy.vocabulary.status
+  module:
+    - options
+    - text
+id: taxonomy_term.status.token
+targetEntityType: taxonomy_term
+bundle: status
+mode: token
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_stock:
+    type: list_default
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_shipping: true
+  langcode: true

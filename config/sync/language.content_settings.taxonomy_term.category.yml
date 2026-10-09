@@ -1,0 +1,11 @@
+uuid: 313f8723-a96d-40e0-8c1c-e54927775a6b
+langcode: uk
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.category
+id: taxonomy_term.category
+target_entity_type_id: taxonomy_term
+target_bundle: category
+default_langcode: site_default
+language_alterable: false

@@ -2,6 +2,8 @@ uuid: 97833075-9476-435b-8693-0f18f4c099c1
 langcode: uk
 status: true
 dependencies:
+  module:
+    - commerce_product
   theme:
     - b5sklo
 _core:
@@ -17,4 +19,11 @@ settings:
   label: 'Заголовок сторінки'
   label_display: '0'
   provider: core
-visibility: {  }
+visibility:
+  'entity_bundle:commerce_product':
+    id: 'entity_bundle:commerce_product'
+    negate: true
+    context_mapping:
+      commerce_product: '@commerce_product.product_route_context:commerce_product'
+    bundles:
+      default: default

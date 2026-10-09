@@ -1,0 +1,21 @@
+uuid: 71ca98fb-883c-499b-b5ff-1d3bfe98a95d
+langcode: uk
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product_variation.field_gtin
+field_name: field_gtin
+entity_type: commerce_product_variation
+type: string
+settings:
+  max_length: 14
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
