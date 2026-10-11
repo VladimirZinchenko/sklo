@@ -7,10 +7,26 @@ dependencies:
     - field.field.commerce_product_variation.default.dimensions
     - field.field.commerce_product_variation.default.field_gtin
     - field.field.commerce_product_variation.default.field_status
+    - field.field.commerce_product_variation.default.field_stock
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_feeds
     - commerce_product
+    - feeds_tamper
+third_party_settings:
+  feeds_tamper:
+    tampers:
+      2e47818d-c20f-4167-a9e5-5dee7ce9fac5:
+        find: 'In stock'
+        replace: '☑ In stock'
+        case_sensitive: false
+        word_boundaries: false
+        whole: false
+        uuid: 2e47818d-c20f-4167-a9e5-5dee7ce9fac5
+        plugin: find_replace
+        source: status
+        weight: 0
+        label: 'Find replace'
 label: Variation
 id: variation
 description: 'Variations import'
@@ -88,6 +104,11 @@ custom_sources:
     label: status
     machine_name: status
     type: csv
+  stock:
+    value: stock
+    label: stock
+    machine_name: stock
+    type: csv
 mappings:
   -
     target: sku
@@ -139,3 +160,10 @@ mappings:
       reference_by: name
       autocreate: false
       autocreate_bundle: status
+  -
+    target: field_stock
+    map:
+      value: stock
+    settings:
+      language: null
+    unique: {  }

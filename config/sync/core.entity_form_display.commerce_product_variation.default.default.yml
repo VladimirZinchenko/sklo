@@ -9,6 +9,7 @@ dependencies:
     - field.field.commerce_product_variation.default.feeds_item
     - field.field.commerce_product_variation.default.field_gtin
     - field.field.commerce_product_variation.default.field_status
+    - field.field.commerce_product_variation.default.field_stock
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
@@ -25,6 +26,13 @@ content:
     weight: 1
     region: content
     settings: {  }
+    third_party_settings: {  }
+  commerce_stock_always_in_stock:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   dimensions:
     type: physical_dimensions_default
@@ -57,6 +65,14 @@ content:
     weight: 93
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_stock:
+    type: string_textfield
+    weight: 94
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

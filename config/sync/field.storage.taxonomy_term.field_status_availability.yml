@@ -1,21 +1,21 @@
-uuid: 4aa439d2-6f44-49a1-90a3-0b54b3ca4cbe
+uuid: 1be658b6-8059-444f-81cb-2a0ddc0529f6
 langcode: uk
 status: true
 dependencies:
   module:
     - options
     - taxonomy
-id: taxonomy_term.field_stock
-field_name: field_stock
+id: taxonomy_term.field_status_availability
+field_name: field_status_availability
 entity_type: taxonomy_term
 type: list_string
 settings:
   allowed_values:
     -
-      value: instock
+      value: status_availability_instock
       label: InStock
     -
-      value: outofstock
+      value: status_availability_outofstock
       label: OutOfStock
   allowed_values_function: ''
 module: options

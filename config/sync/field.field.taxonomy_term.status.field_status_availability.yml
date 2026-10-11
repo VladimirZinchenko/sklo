@@ -1,23 +1,23 @@
-uuid: 1f724ee7-b582-47e5-9bd0-18ac8b85333b
+uuid: 667b3a10-9ea9-4afc-abba-be7a67597f0f
 langcode: uk
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_shipping
+    - field.storage.taxonomy_term.field_status_availability
     - taxonomy.vocabulary.status
   module:
     - options
-id: taxonomy_term.status.field_shipping
-field_name: field_shipping
+id: taxonomy_term.status.field_status_availability
+field_name: field_status_availability
 entity_type: taxonomy_term
 bundle: status
-label: Shipping
+label: 'Status availability'
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: pickup_now_in_shop
+    value: status_availability_instock
 default_value_callback: ''
 settings: {  }
 field_type: list_string

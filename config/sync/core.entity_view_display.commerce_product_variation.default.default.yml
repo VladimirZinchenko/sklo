@@ -9,6 +9,7 @@ dependencies:
     - field.field.commerce_product_variation.default.feeds_item
     - field.field.commerce_product_variation.default.field_gtin
     - field.field.commerce_product_variation.default.field_status
+    - field.field.commerce_product_variation.default.field_stock
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
@@ -42,6 +43,14 @@ content:
       link: false
     third_party_settings: {  }
     weight: 5
+    region: content
+  field_stock:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
     region: content
   list_price:
     type: commerce_price_default

@@ -1,23 +1,23 @@
-uuid: bcd553e9-72bc-497f-b9de-0b39ab83a9dd
+uuid: 128300c9-044f-4418-99b0-0916f23bade2
 langcode: uk
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_stock
+    - field.storage.taxonomy_term.field_status_stock
     - taxonomy.vocabulary.status
   module:
     - options
-id: taxonomy_term.status.field_stock
-field_name: field_stock
+id: taxonomy_term.status.field_status_stock
+field_name: field_status_stock
 entity_type: taxonomy_term
 bundle: status
-label: Stock
+label: 'Status stock'
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: instock
+    value: status_stock_pickup
 default_value_callback: ''
 settings: {  }
 field_type: list_string

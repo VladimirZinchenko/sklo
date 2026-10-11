@@ -3,8 +3,8 @@ langcode: uk
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.status.field_shipping
-    - field.field.taxonomy_term.status.field_stock
+    - field.field.taxonomy_term.status.field_status_availability
+    - field.field.taxonomy_term.status.field_status_stock
     - taxonomy.vocabulary.status
   module:
     - options
@@ -21,19 +21,19 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_shipping:
+  field_status_availability:
     type: list_default
-    label: inline
+    label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 2
+    weight: 4
     region: content
-  field_stock:
+  field_status_stock:
     type: list_default
-    label: inline
+    label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
 hidden:
   langcode: true

@@ -1,0 +1,21 @@
+uuid: 572e5e9d-30ec-43c9-b2cd-77a83eeefc46
+langcode: uk
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: commerce_product_variation.field_stock
+field_name: field_stock
+entity_type: commerce_product_variation
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

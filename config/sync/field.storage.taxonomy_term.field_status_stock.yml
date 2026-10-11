@@ -1,22 +1,22 @@
-uuid: 13947d77-f7c3-4c98-aaa3-795b767ccb18
+uuid: 18161d5d-c223-458f-8b81-99f0c2002f0b
 langcode: uk
 status: true
 dependencies:
   module:
     - options
     - taxonomy
-id: taxonomy_term.field_shipping
-field_name: field_shipping
+id: taxonomy_term.field_status_stock
+field_name: field_status_stock
 entity_type: taxonomy_term
 type: list_string
 settings:
   allowed_values:
     -
-      value: pickup_now_in_shop
-      label: 'Pickup now in Shop'
+      value: status_stock_pickup
+      label: 'Pick Up'
     -
-      value: delivery_2_3_days
-      label: 'Delivery 2-3 days'
+      value: status_stock_delivery
+      label: Delivery
   allowed_values_function: ''
 module: options
 locked: false

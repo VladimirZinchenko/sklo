@@ -43,6 +43,8 @@
         "drupal/commerce_feeds": "^1.0@alpha",
         "drupal/commerce_novaposhta": "2.1.0",
         "drupal/commerce_shipping": "^3.0",
+        "drupal/commerce_simple_stock": "1.x-dev@dev",
+        "drupal/commerce_stock": "^3.0",
         "drupal/core-composer-scaffold": "^10.6",
         "drupal/core-project-message": "^10.6",
         "drupal/core-recommended": "^10.6",
